@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editor Catálogos Multipágina</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <div id="hotbar" class="movible" tabindex="0">
+      <button id="btnAddPage" title="Añadir página">+ Página</button>
+      <button id="btnAddText" title="Añadir texto">Texto</button>
+      <button id="btnAddImage" title="Añadir imagen">Imagen</button>
+      <button id="btnToggleView" title="Cambiar vista móvil/PC">Modo Móvil</button>
+      <button id="btnExportZip" title="Exportar ZIP">Exportar ZIP</button>
+      <button id="btnLoadZip" title="Cargar ZIP">Cargar ZIP</button>
+      <input type="file" id="uploadZip" accept=".zip" style="display:none" />
+    </div>
+
+    <div id="pageManager">
+      <ul id="pagesList"></ul>
+    </div>
+
+    <div id="editorArea" class="desktopView" tabindex="0"></div>
+
+    <div id="editPanel" hidden>
+      <h3>Editar elemento</h3>
+      <label for="editContent">Contenido:</label>
+      <textarea id="editContent" rows="4"></textarea>
+      <label for="editImageUrl">URL Imagen (si aplica):</label>
+      <input type="text" id="editImageUrl" placeholder="Ej: https://..." />
+      <button id="btnSaveEdit">Guardar</button>
+      <button id="btnDeleteElement">Eliminar</button>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
