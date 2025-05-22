@@ -1,0 +1,195 @@
+body, html {
+  margin: 0; padding: 0; height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+/* Hotbar movible */
+#hotbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #333;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  gap: 6px;
+  cursor: grab;
+  user-select: none;
+  z-index: 9999;
+}
+
+#hotbar:active {
+  cursor: grabbing;
+}
+
+#hotbar button {
+  background: #555;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#hotbar button:hover {
+  background: #777;
+}
+
+#pageManager {
+  width: 160px;
+  background: white;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#pagesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#pagesList li {
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  user-select: none;
+  background: #eee;
+  font-weight: bold;
+}
+
+#pagesList li.active {
+  background: #0088ff;
+  color: white;
+  border-color: #0066cc;
+}
+
+#editorArea {
+  flex-grow: 1;
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-y: auto;
+  position: relative;
+  min-height: 600px;
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+}
+
+#editorArea.mobileView {
+  max-width: 420px;
+  margin: 10px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  border-radius: 12px;
+}
+
+.editable-element {
+  border: 1px dashed transparent;
+  padding: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.editable-element.selected {
+  border-color: #0088ff;
+  background-color: #e6f0ff;
+}
+
+#editPanel {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  width: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px;
+  z-index: 99999;
+  user-select: text;
+}
+
+#editPanel h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+#editPanel label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+#editPanel textarea, 
+#editPanel input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-top: 4px;
+}
+
+#editPanel button {
+  margin-top: 12px;
+  margin-right: 8px;
+  padding: 8px 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #0088ff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+#editPanel button:hover {
+  background-color: #0066cc;
+}
+
+.editable-element img {
+  max-width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+#editorArea::-webkit-scrollbar {
+  width: 8px;
+}
+
+#editorArea::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  #pageManager {
+    display: none;
+  }
+
+  #editPanel {
+    width: 90vw;
+    top: auto;
+    bottom: 10px;
+    right: 5%;
+  }
+}
