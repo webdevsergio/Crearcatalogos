@@ -53,3 +53,60 @@ let jsContent = `// JS exportado desde editor\n`;
     hotbar.style.top = `${origY + dy}px`;
   });
 })();
+// Crear nueva página
+btnAddPage.addEventListener('click', () => {
+  const pageName = prompt("Nombre del archivo HTML (sin .html):");
+  if (!pageName) return;
+  const page = {
+    name: pageName,
+    html: '',
+    elements: []
+  };
+  pages.push(page);
+  setCurrentPage(page);
+  renderPagesList();
+});
+
+function setCurrentPage(page) {
+  currentPage = page;
+  renderEditor();
+}
+
+function renderPagesList() {
+  pagesList.innerHTML = '';
+  pages.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = p.name;
+    btn.onclick = () => setCurrentPage(p);
+    pagesList.appendChild(btn);
+  });
+}
+
+// Añadir elementos
+btnAddText.addEventListener('click', () => {
+  if (!currentPage) return;
+  const text = prompt("Texto:");
+  if (!text) return;
+  const el = {
+    type: 'text',
+    content: text,
+    x: 50,
+    y: 50
+  };
+  currentPage.elements.push(el);
+  renderEditor();
+});
+
+btnAddImage.addEventListener('click', () => {
+  if (!currentPage) return;
+  const url = prompt("URL de la imagen:");
+  if (!url) return;
+  const el = {
+    type: 'image',
+    src: url,
+    x: 100,
+    y: 100
+  };
+  currentPage.elements.push(el);
+  renderEditor();
+});
