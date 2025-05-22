@@ -110,3 +110,55 @@ btnAddImage.addEventListener('click', () => {
   currentPage.elements.push(el);
   renderEditor();
 });
+function renderEditor() {
+  editorArea.innerHTML = '';
+  if (!currentPage) return;
+
+  currentPage.elements.forEach((el, index) => {
+    const div = document.createElement('div');
+    div.className = 'draggable';
+    div.style.left = el.x + 'px';
+    div.style.top = el.y + 'px';
+
+    if (el.type === 'text') {
+      div.innerHTML = `<p>${el.content}</p>`;
+    } else if (el.type === 'image') {
+      div.innerHTML = `<img src="${el.src}" style="max-width:100px; max-height:100px;">`;
+    }
+
+    div.onclick = (e) => {
+      e.stopPropagation();
+      selectedElement = el;
+      showEditPanel(el);
+    };
+
+    makeDraggable(div, el);
+    editorArea.appendChild(div);
+  });
+}
+
+function makeDraggable(elem, data) {
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  elem.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.offsetX;
+    offsetY = e.offsetY;
+    e.preventDefault();
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    elem.style.left = `${x}px`;
+    elem.style.top = `${y}px`;
+    data.x = x;
+    data.y = y;
+  });
+}
